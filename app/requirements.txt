@@ -27,7 +27,7 @@ urllib3==1.26.9
 virtualenv==20.15.0
 virtualenv-clone==0.5.7
 asgiref==3.5.0
-Django==4.0.4
+Django==4.0.6
 django-cors-headers==3.13.0
 djangorestframework==3.13.1
 numpy==1.23.1
