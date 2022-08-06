@@ -7,6 +7,7 @@ ENV PYTHONUNBUFFERED 1
 
 # set the working directory
 RUN mkdir app
+RUN mkdir images
 WORKDIR /app
 # copy project
 COPY $REPO_PATH /app
@@ -17,6 +18,8 @@ RUN apt-get install gcc -y
 RUN apt-get install libpq-dev -y
 # install netcat : for the nc command in entrypoin.sh
 RUN apt-get install -y netcat
+# install opencv 
+RUN apt-get install -y python3-opencv
 
 # copy and install dependencies
 RUN pip install --upgrade pip

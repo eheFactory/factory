@@ -1,25 +1,25 @@
 version: '3.8'
 
 services:
-  webberry-postgres:
-    container_name: webberry-postgres
-    hostname: webberry-postgres
+  factory-postgres:
+    container_name: factory-postgres
+    hostname: factory-postgres
     image: postgres:13.0-alpine
     env_file:
       - ./app/.env
     networks:
-      - webberry-main-net
+      - factory-main-net
     expose:
-      - "5432"
+      - "5433"
     ports:
-      - "5432:5432"
+      - "5433:5433"
     volumes:
       - "postgresql-data:/var/lib/postgresql/data"
-    command: -p 5432
+    command: -p 5433
 
-  webberry-app:
-    container_name: webberry-app
-    hostname: webberry-app
+  factory-app:
+    container_name: factory-app
+    hostname: factory-app
     build: 
       context: ./app
       args:
@@ -31,14 +31,15 @@ services:
       - "MIGRATIONS=1"
     volumes:
       - ./app:/app
+      - ./images:/images
     ports:
       - "0.0.0.0:8006:8006"
     restart: always
     depends_on:
-      - webberry-postgres
+      - factory-postgres
     working_dir: /app
     networks:
-      - webberry-main-net
+      - factory-main-net
 
 
 volumes:
@@ -46,5 +47,5 @@ volumes:
     driver: local
 
 networks:
-  webberry-main-net:
+  factory-main-net:
     driver: bridge
